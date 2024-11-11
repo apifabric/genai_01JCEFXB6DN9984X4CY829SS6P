@@ -1,0 +1,63 @@
+// Copy this text, paste to https://dbdiagram.io/d
+// Or, https://databasediagram.com/app
+// Or, view in VSCode with extension: "DBML Live Preview"
+
+Project DBML {
+  Note: '''
+Dessert: This table maintains a list of desserts that can be enjoyed during a road trip, with details like name and type.
+Destination: This table contains details about trip destinations, including the name, region, and popularity rating.
+Road: This table represents the roads connecting various destinations, including the road name and its condition.
+Roadtrip: This table holds information about planned road trips, such as start date, end date, and the overall trip status.
+RoadtripDessertLink: This link table relates road trips to the desserts to be enjoyed during the trips.
+RoadtripRoadLink: This link table relates road trips to the roads traveled on these trips.
+'''
+}
+
+Table Dessert {
+    id INTEGER [primary key]
+    name VARCHAR(100) 
+    Type VARCHAR(50) 
+    }
+
+Table Destination {
+    id INTEGER [primary key]
+    name VARCHAR(100) 
+    region VARCHAR(100) 
+    popularity_rating INTEGER 
+    }
+
+Table Road {
+    id INTEGER [primary key]
+    name VARCHAR(100) 
+    condition VARCHAR(50) 
+    distance_km INTEGER 
+    destination_id INTEGER 
+    }
+
+Table Roadtrip {
+    id INTEGER [primary key]
+    start_date DATE 
+    end_date DATE 
+    status VARCHAR(50) 
+    }
+
+Table RoadtripDessertLink {
+    id INTEGER [primary key]
+    roadtrip_id INTEGER 
+    dessert_id INTEGER 
+    }
+
+Table RoadtripRoadLink {
+    id INTEGER [primary key]
+    roadtrip_id INTEGER 
+    road_id INTEGER 
+    }
+
+
+
+// Relationships
+    Ref: Road.(destination_id) < Destination.(id)
+    Ref: RoadtripDessertLink.(dessert_id) < Dessert.(id)
+    Ref: RoadtripDessertLink.(roadtrip_id) < Roadtrip.(id)
+    Ref: RoadtripRoadLink.(road_id) < Road.(id)
+    Ref: RoadtripRoadLink.(roadtrip_id) < Roadtrip.(id)

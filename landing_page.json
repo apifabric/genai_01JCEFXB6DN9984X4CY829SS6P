@@ -1,0 +1,116 @@
+{
+    "name": "Dessert Roadtrip Planner",
+    "logo": {
+        "Type": "Logo",
+        "name": "Dessert Roadtrip Planner Logo",
+        "description": "A whimsical logo featuring a car made of ice cream and candies highlighting the fun and adventurous spirit of a dessert roadtrip."
+    },
+    "sections": [
+        {
+            "title": "Embark on a Sweet Journey",
+            "subtitle": "Discover the Best Dessert Spots Across the Country",
+            "name": "Hero Section",
+            "label": "Home",
+            "content": "**Unleash your sweet tooth and hit the road with our exclusive Dessert Roadtrip Planner!**  \nJoin us as we guide you through the most delectable desserts one roadtrip at a time. Our planner is designed to make your sugary adventure effortless and unforgettable.  \n\n**Start Your Journey Today!**",
+            "order": 1,
+            "Type": "Hero",
+            "images": [
+                {
+                    "Type": "Hero",
+                    "name": "Sweet Journey Banner",
+                    "description": "A vibrant image of a road winding through fields of desserts, symbolizing the start of a delicious road adventure."
+                }
+            ]
+        },
+        {
+            "title": "Our Story",
+            "subtitle": "The Sweet Tale Behind Our Passion",
+            "name": "About Section",
+            "label": "About",
+            "content": "Our journey began with a simple idea: explore the world through its sweet treats. What started as a fun idea among friends soon blossomed into a full-fledged dessert roadtrip tradition!  \n\nWe believe that food, especially treats, is an integral part of any cultural experience. Join us as we share our discoveries and help you create your own sweet adventures.",
+            "order": 2,
+            "Type": "About",
+            "images": [
+                {
+                    "Type": "Background",
+                    "name": "Our Story Background",
+                    "description": "A collage of various desserts captured during our roadtrips."
+                }
+            ]
+        },
+        {
+            "title": "Your Dessert Adventure Awaits",
+            "subtitle": "Curated Itineraries",
+            "name": "Services Section",
+            "label": "Services",
+            "content": "- **Customizable Itineraries**: Tailor your roadtrip to include your favorite types of desserts, from cupcakes to cannoli.  \n- **Local Highlights**: Discover local gems that are off the beaten path but packed with flavor.  \n- **Vegan and Gluten-Free Options**: We ensure your dietary preferences are catered to, without compromising on taste!",
+            "order": 3,
+            "Type": "Services",
+            "images": [
+                {
+                    "Type": "ItemListing",
+                    "name": "Dessert Icons",
+                    "description": "Icons representing different types of desserts featured in our itineraries."
+                }
+            ]
+        },
+        {
+            "title": "Connect with Us",
+            "subtitle": "We'd Love to Hear From You!",
+            "name": "Contact Section",
+            "label": "Contact",
+            "content": "**Have a question, suggestion, or simply want to share your dessert story?**  \n\nReach out to us through our contact form, and one of our dessert aficionados will get back to you pronto!\n  \n- **Email**: hello@dessertroadtripplanner.com  \n- **Phone**: +1 (800) 555-CAKE  \n\nFollow us on social media to stay updated on our latest sweet finds and roadtrip tips!",
+            "order": 4,
+            "Type": "Contact",
+            "images": [
+                {
+                    "Type": "Map",
+                    "name": "Contact Map",
+                    "description": "A map with sweet spot locations marked for easier planning."
+                }
+            ]
+        },
+        {
+            "title": "Join Our Community",
+            "subtitle": "Be Part of Something Sweet",
+            "name": "CallToAction Section",
+            "label": "Join",
+            "content": "Sign up for our newsletter for exclusive sneak peeks into upcoming sweet spots, delicious recipes, and special promotions!  \n\n**Join Today and Sweeten Your Journey!**",
+            "order": 5,
+            "Type": "CallToAction",
+            "images": [
+                {
+                    "Type": "CallToAction",
+                    "name": "Join Us Banner",
+                    "description": "Enticing graphic encouraging visitors to join the Dessert Roadtrip community."
+                }
+            ]
+        },
+        {
+            "title": "Meet Our Sweet Guides",
+            "subtitle": "The Team Behind Dessert Roadtrip Planner",
+            "name": "Team Section",
+            "label": "Team",
+            "content": "Our team is a delightful mix of culinary enthusiasts, seasoned travelers, and dessert lovers, all dedicated to curating the sweetest experiences for you.  \n- **Anna Sweetness**: Passionate Pastry Chef and Dessert Critic  \n- **John Sugarkick**: Roadtrip Enthusiast and Itinerary Guru  \n- **Lily Confection**: Social Media Maven and Dessert Trendsetter",
+            "order": 6,
+            "Type": "Team",
+            "images": [
+                {
+                    "Type": "Headshot",
+                    "name": "Anna Sweetness",
+                    "description": "Headshot of Anna, the lead pastry chef."
+                },
+                {
+                    "Type": "Headshot",
+                    "name": "John Sugarkick",
+                    "description": "Headshot of John, the roadtrip expert."
+                },
+                {
+                    "Type": "Headshot",
+                    "name": "Lily Confection",
+                    "description": "Headshot of Lily, the social media expert."
+                }
+            ]
+        }
+    ]
+}

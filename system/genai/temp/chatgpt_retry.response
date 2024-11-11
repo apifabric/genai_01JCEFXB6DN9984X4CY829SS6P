@@ -1,0 +1,43 @@
+{
+    "models": [
+        {
+            "classname": "Destination",
+            "code": "class Destination(Base):\n    \"\"\"\n    description: This table contains details about trip destinations, including the name, region, and popularity rating.\n    \"\"\"\n    __tablename__ = 'destination'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String(100), nullable=False)\n    region = Column(String(100), nullable=False)\n    popularity_rating = Column(Integer)\n\n\n    roads = relationship('Road', back_populates='destination')",
+            "description": "This table contains details about trip destinations, including the name, region, and popularity rating.",
+            "name": "destination"
+        },
+        {
+            "classname": "Road",
+            "code": "class Road(Base):\n    \"\"\"\n    description: This table represents the roads connecting various destinations, including the road name and its condition.\n    \"\"\"\n    __tablename__ = 'road'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String(100), nullable=False)\n    condition = Column(String(50), nullable=False)\n    distance_km = Column(Integer, nullable=False)\n    destination_id = Column(Integer, ForeignKey('destination.id'))\n\n\n    destination = relationship('Destination', back_populates='roads')\n    roadtrips = relationship('Roadtrip', secondary='roadtrip_road_link', back_populates='roads')",
+            "description": "This table represents the roads connecting various destinations, including the road name and its condition.",
+            "name": "road"
+        },
+        {
+            "classname": "Roadtrip",
+            "code": "class Roadtrip(Base):\n    \"\"\"\n    description: This table holds information about planned road trips, such as start date, end date, and the overall trip status.\n    \"\"\"\n    __tablename__ = 'roadtrip'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    start_date = Column(Date, nullable=False)\n    end_date = Column(Date)\n    status = Column(String(50), nullable=False)\n\n\n    roads = relationship('Road', secondary='roadtrip_road_link', back_populates='roadtrips')\n    desserts = relationship('Dessert', secondary='roadtrip_dessert_link', back_populates='roadtrips')",
+            "description": "This table holds information about planned road trips, such as start date, end date, and the overall trip status.",
+            "name": "roadtrip"
+        },
+        {
+            "classname": "Dessert",
+            "code": "class Dessert(Base):\n    \"\"\"\n    description: This table maintains a list of desserts that can be enjoyed during a road trip, with details like name and type.\n    \"\"\"\n    __tablename__ = 'dessert'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String(100), nullable=False)\n    type = Column(String(50))\n\n\n    roadtrips = relationship('Roadtrip', secondary='roadtrip_dessert_link', back_populates='desserts')",
+            "description": "This table maintains a list of desserts that can be enjoyed during a road trip, with details like name and type.",
+            "name": "dessert"
+        },
+        {
+            "classname": "RoadtripRoadLink",
+            "code": "class RoadtripRoadLink(Base):\n    \"\"\"\n    description: This link table relates road trips to the roads traveled on these trips.\n    \"\"\"\n    __tablename__ = 'roadtrip_road_link'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    roadtrip_id = Column(Integer, ForeignKey('roadtrip.id'))\n    road_id = Column(Integer, ForeignKey('road.id'))",
+            "description": "This link table relates road trips to the roads traveled on these trips.",
+            "name": "roadtrip_road_link"
+        },
+        {
+            "classname": "RoadtripDessertLink",
+            "code": "class RoadtripDessertLink(Base):\n    \"\"\"\n    description: This link table relates road trips to the desserts to be enjoyed during the trips.\n    \"\"\"\n    __tablename__ = 'roadtrip_dessert_link'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    roadtrip_id = Column(Integer, ForeignKey('roadtrip.id'))\n    dessert_id = Column(Integer, ForeignKey('dessert.id'))",
+            "description": "This link table relates road trips to the desserts to be enjoyed during the trips.",
+            "name": "roadtrip_dessert_link"
+        }
+    ],
+    "rules": [],
+    "test_data": "from datetime import date\n\n# Create test data\n\ndestination_1 = Destination(id=1, name='Grand Canyon', region='AZ', popularity_rating=5)\ndestination_2 = Destination(id=2, name='Yellowstone', region='WY', popularity_rating=4)\ndestination_3 = Destination(id=3, name='Yosemite', region='CA', popularity_rating=5)\ndestination_4 = Destination(id=4, name='Zion', region='UT', popularity_rating=3)\n\nroad_1 = Road(id=1, name='Route 66', condition='Good', distance_km=2450, destination_id=1)\nroad_2 = Road(id=2, name='I-80', condition='Fair', distance_km=2890, destination_id=2)\nroad_3 = Road(id=3, name='CA-120', condition='Excellent', distance_km=200, destination_id=3)\nroad_4 = Road(id=4, name='UT-9', condition='Good', distance_km=54, destination_id=4)\n\nroadtrip_1 = Roadtrip(id=1, start_date=date(2023, 6, 15), end_date=date(2023, 6, 25), status='Planned')\nroadtrip_2 = Roadtrip(id=2, start_date=date(2023, 7, 10), end_date=date(2023, 7, 20), status='Completed')\nroadtrip_3 = Roadtrip(id=3, start_date=date(2023, 8, 5), end_date=date(2023, 8, 15), status='Cancelled')\nroadtrip_4 = Roadtrip(id=4, start_date=date(2023, 9, 1), end_date=date(2023, 9, 10), status='Pending')\n\ndessert_1 = Dessert(id=1, name='Ice Cream', type='Frozen')\ndessert_2 = Dessert(id=2, name='Brownie', type='Baked')\ndessert_3 = Dessert(id=3, name='Fruit Pie', type='Baked')\ndessert_4 = Dessert(id=4, name='Gelato', type='Frozen')\n\nroadtrip_road_link_1 = RoadtripRoadLink(id=1, roadtrip_id=1, road_id=1)\nroadtrip_road_link_2 = RoadtripRoadLink(id=2, roadtrip_id=2, road_id=2)\nroadtrip_road_link_3 = RoadtripRoadLink(id=3, roadtrip_id=3, road_id=3)\nroadtrip_road_link_4 = RoadtripRoadLink(id=4, roadtrip_id=4, road_id=4)\n\nroadtrip_dessert_link_1 = RoadtripDessertLink(id=1, roadtrip_id=1, dessert_id=1)\nroadtrip_dessert_link_2 = RoadtripDessertLink(id=2, roadtrip_id=2, dessert_id=2)\nroadtrip_dessert_link_3 = RoadtripDessertLink(id=3, roadtrip_id=3, dessert_id=3)\nroadtrip_dessert_link_4 = RoadtripDessertLink(id=4, roadtrip_id=4, dessert_id=4)",
+    "name": "Dessert Roadtrip Planner"
+}

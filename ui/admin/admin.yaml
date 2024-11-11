@@ -1,0 +1,195 @@
+about:
+  date: November 11, 2024 20:51:44
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 5
+  number_tables: 6
+info_toggle_checked: true
+resources:
+  Dessert:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: Type
+    - name: id
+    description: This table maintains a list of desserts that can be enjoyed during
+      a road trip, with details like name and type.
+    info_list: This table maintains a list of desserts that can be enjoyed during
+      a road trip, with details like name and type.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - dessert_id
+      name: RoadtripDessertLinkList
+      resource: RoadtripDessertLink
+    type: Dessert
+    user_key: name
+  Destination:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: region
+      required: true
+    - name: popularity_rating
+    - name: id
+    description: This table contains details about trip destinations, including the
+      name, region, and popularity rating.
+    info_list: This table contains details about trip destinations, including the
+      name, region, and popularity rating.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - destination_id
+      name: RoadList
+      resource: Road
+    type: Destination
+    user_key: name
+  Road:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: destination_id
+    - name: condition
+      required: true
+    - name: distance_km
+      required: true
+    - name: id
+    description: This table represents the roads connecting various destinations,
+      including the road name and its condition.
+    info_list: This table represents the roads connecting various destinations, including
+      the road name and its condition.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - road_id
+      name: RoadtripRoadLinkList
+      resource: RoadtripRoadLink
+    - direction: toone
+      fks:
+      - destination_id
+      name: destination
+      resource: Destination
+    type: Road
+    user_key: name
+  Roadtrip:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: start_date
+      required: true
+      type: DATE
+    - name: end_date
+      type: DATE
+    - name: status
+      required: true
+    description: This table holds information about planned road trips, such as start
+      date, end date, and the overall trip status.
+    info_list: This table holds information about planned road trips, such as start
+      date, end date, and the overall trip status.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - roadtrip_id
+      name: RoadtripDessertLinkList
+      resource: RoadtripDessertLink
+    - direction: tomany
+      fks:
+      - roadtrip_id
+      name: RoadtripRoadLinkList
+      resource: RoadtripRoadLink
+    type: Roadtrip
+    user_key: id
+  RoadtripDessertLink:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: dessert_id
+    - name: roadtrip_id
+    description: This link table relates road trips to the desserts to be enjoyed
+      during the trips.
+    info_list: This link table relates road trips to the desserts to be enjoyed during
+      the trips.
+    tab_groups:
+    - direction: toone
+      fks:
+      - dessert_id
+      name: dessert
+      resource: Dessert
+    - direction: toone
+      fks:
+      - roadtrip_id
+      name: roadtrip
+      resource: Roadtrip
+    type: RoadtripDessertLink
+    user_key: id
+  RoadtripRoadLink:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: road_id
+    - name: roadtrip_id
+    description: This link table relates road trips to the roads traveled on these
+      trips.
+    info_list: This link table relates road trips to the roads traveled on these trips.
+    tab_groups:
+    - direction: toone
+      fks:
+      - road_id
+      name: road
+      resource: Road
+    - direction: toone
+      fks:
+      - roadtrip_id
+      name: roadtrip
+      resource: Roadtrip
+    type: RoadtripRoadLink
+    user_key: id
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'

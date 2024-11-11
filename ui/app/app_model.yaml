@@ -1,0 +1,277 @@
+about:
+  date: November 11, 2024 20:51:44
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Dessert:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(100)
+    - name: Type
+      template: text
+      type: VARCHAR(50)
+    - name: id
+      template: integer
+      type: INTEGER
+    description: This table maintains a list of desserts that can be enjoyed during
+      a road trip, with details like name and type.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: This table maintains a list of desserts that can be enjoyed during
+      a road trip, with details like name and type.
+    label: Dessert
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - dessert_id
+      name: RoadtripDessertLinkList
+      resource: RoadtripDessertLink
+    type: Dessert
+  Destination:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(100)
+    - name: region
+      required: true
+      template: text
+      type: VARCHAR(100)
+    - name: popularity_rating
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    description: This table contains details about trip destinations, including the
+      name, region, and popularity rating.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: This table contains details about trip destinations, including the
+      name, region, and popularity rating.
+    label: Destination
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - destination_id
+      name: RoadList
+      resource: Road
+    type: Destination
+  Road:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR(100)
+    - name: destination_id
+      template: integer
+      type: INTEGER
+    - name: condition
+      required: true
+      template: text
+      type: VARCHAR(50)
+    - name: distance_km
+      required: true
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    description: This table represents the roads connecting various destinations,
+      including the road name and its condition.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    home_template: home_template.html
+    info_list: This table represents the roads connecting various destinations, including
+      the road name and its condition.
+    label: Road
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - road_id
+      name: RoadtripRoadLinkList
+      resource: RoadtripRoadLink
+    - direction: toone
+      fks:
+      - destination_id
+      name: destination
+      resource: Destination
+    type: Road
+  Roadtrip:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: start_date
+      required: true
+      type: DATE
+    - name: end_date
+      type: DATE
+    - name: status
+      required: true
+      template: text
+      type: VARCHAR(50)
+    description: This table holds information about planned road trips, such as start
+      date, end date, and the overall trip status.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: This table holds information about planned road trips, such as start
+      date, end date, and the overall trip status.
+    label: Roadtrip
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - roadtrip_id
+      name: RoadtripDessertLinkList
+      resource: RoadtripDessertLink
+    - direction: tomany
+      fks:
+      - roadtrip_id
+      name: RoadtripRoadLinkList
+      resource: RoadtripRoadLink
+    type: Roadtrip
+  RoadtripDessertLink:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: dessert_id
+      template: integer
+      type: INTEGER
+    - name: roadtrip_id
+      template: integer
+      type: INTEGER
+    description: This link table relates road trips to the desserts to be enjoyed
+      during the trips.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: This link table relates road trips to the desserts to be enjoyed during
+      the trips.
+    label: RoadtripDessertLink
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dessert_id
+      name: dessert
+      resource: Dessert
+    - direction: toone
+      fks:
+      - roadtrip_id
+      name: roadtrip
+      resource: Roadtrip
+    type: RoadtripDessertLink
+  RoadtripRoadLink:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: road_id
+      template: integer
+      type: INTEGER
+    - name: roadtrip_id
+      template: integer
+      type: INTEGER
+    description: This link table relates road trips to the roads traveled on these
+      trips.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: This link table relates road trips to the roads traveled on these trips.
+    label: RoadtripRoadLink
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - road_id
+      name: road
+      resource: Road
+    - direction: toone
+      fks:
+      - roadtrip_id
+      name: roadtrip
+      resource: Roadtrip
+    type: RoadtripRoadLink
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false
